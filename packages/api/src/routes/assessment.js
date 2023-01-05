@@ -6,11 +6,12 @@ const { Router } = require(`express`);
 const assessmentRouter = Router();
 
 assessmentRouter.post(
-  `/`,
+  `/submit`,
+  // eslint-disable-next-line require-await
   async (req, res, next) => {
     try {
       const { assessment } = req.body;
-
+      // const assessment = await AssessmentService.submit();
       // verify that your data is making it here to the API by using console.log(assessment);
       // call the AssessmentService.submit function from packages/api/src/microservices/Assessment-Service.js and
       // supply the correct parameters
@@ -18,7 +19,7 @@ assessmentRouter.post(
       ResponseHandler(
         res,
         `Submitted assessment`,
-        {},
+        assessment,
       );
     } catch (err) {
       next(err);
