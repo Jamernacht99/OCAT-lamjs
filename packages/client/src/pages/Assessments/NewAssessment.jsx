@@ -4,44 +4,76 @@ import { useForm } from 'react-hook-form';
 import { AssessmentService } from '../../services/AssessmentService';
 import '../../scss/formStyles.scss';
 
-function riskScore(p_score) {
+function riskLevel_color(p_score) {
   switch (true) {
     case p_score <= 2:
-      return `riskScore_low bkClExclude1`;
+      return `riskLevel_low bkClExclude1`;
     case p_score <= 4 &&
          p_score >= 2:
-      return `riskScore_medium bkClExclude1`;
+      return `riskLevel_medium bkClExclude1`;
     case p_score >= 5:
-      return `riskScore_high bkClExclude1`;
+      return `riskLevel_high bkClExclude1`;
     default:
-      return `riskScore_low bkClExclude1`;
+      return `riskLevel_low bkClExclude1`;
   }
+}
+function riskLevel_text(p_score) {
+  switch (true) {
+    case p_score <= 2:
+      return `Low`;
+    case p_score <= 4 &&
+         p_score >= 2:
+      return `Medium`;
+    case p_score >= 5:
+      return `High`;
+    default:
+      return `Low`;
+  }
+}
+function sum(obj) {
+  let objSum = 0;
+  for (const el in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, el)) {
+      objSum += parseFloat(obj[el]);
+    }
+  }
+  return objSum;
+}
+function popupSnack() {
+  const x = document.getElementById(`snackbar`);
+  x.className = `show`;
+  setTimeout(() => { x.className = x.className.replace(`show`, ``); }, 3000);
 }
 
 export const NewAssessment = () => {
   // create a form that utilizes the "onSubmit" function to send data to
   // packages/client/src/services/AssessmentService.js and then onto the packages/api/src/routes/assessment express API
-  const { getValues, handleSubmit, register, watch } = useForm({
+  const { handleSubmit, register, watch } = useForm({
     defaultValues: {
       responses: [ 0, 0, 0, 0, 0 ],
+      riskLevel: `Low`,
       score: 0,
+      temp: 0,
     },
   });
   const onSubmit = async (data) => {
-    console.log(typeof getValues(`responses`));
-    // getValues(`responses`).reduce()
     await AssessmentService.submit(data);
+    popupSnack();
   };
 
   const vibeCheck = watch();
 
+  const [ scoreRender, setScoreRender ] = useState(`score`);
+
   useEffect(() => {
-    console.log(vibeCheck);
+    setScoreRender(sum(vibeCheck.responses));
+
   }, [ vibeCheck ]);
 
   return <Form className="flexColumn"
     onSubmit={handleSubmit(onSubmit)}
   >
+    <div id="snackbar">Successfully submitted!</div>
 
     <div className="formTitle">
       <h1>Cat Behavioral Instrument</h1>
@@ -75,10 +107,11 @@ export const NewAssessment = () => {
         <div className="questionTitle bkClExclude1">
           <h4>Questions & Responses</h4>
         </div>
-        <div className={riskScore(getValues(`score`))}>
+        <div id="scoreBoard" className={riskLevel_color(scoreRender)}>
           Score:
-          {getValues(`score`)}
+          {scoreRender}
           | Risk Level:
+          {riskLevel_text(scoreRender)}
         </div>
       </div>
       <div className="formQuestions flexColumn">
