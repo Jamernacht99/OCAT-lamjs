@@ -48,16 +48,16 @@ function popupSnack() {
 export const NewAssessment = () => {
   // create a form that utilizes the "onSubmit" function to send data to
   // packages/client/src/services/AssessmentService.js and then onto the packages/api/src/routes/assessment express API
-  const { handleSubmit, register, watch } = useForm({
+  const { handleSubmit, register, reset, watch } = useForm({
     defaultValues: {
       responses: [ 0, 0, 0, 0, 0 ],
       riskLevel: `Low`,
       score: 0,
-      temp: 0,
     },
   });
   const onSubmit = async (data) => {
     await AssessmentService.submit(data);
+    reset();
     popupSnack();
   };
 
