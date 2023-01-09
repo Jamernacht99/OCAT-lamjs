@@ -149,13 +149,20 @@
   border: 3px outset rgb(89, 33, 33);
 }
 
+.error_message {
+  color: #bf1650;
+}
 
+.error_message::before {
+  display: inline;
+  content: "⚠ ";
+}
 
-input[styleName*="q"] {
+input[stylename*="q"] {
   display: none;
 }
 
-input[styleName*="q"]:checked+label {
+input[stylename*="q"]:checked+label {
   /* style passive state as you like */
   border: 3px outset rgb(89, 33, 33);
   background-color: rgb(69, 247, 69)
