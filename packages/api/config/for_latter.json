@@ -1,0 +1,18 @@
+{
+  "server": {
+    "port": 4000
+  },
+  "database": {
+    "username": "itsc",
+    "password": "$0lut10n",
+    "database": "lamjs",
+    "host": "itscappdev07.cech.uc.edu",
+    "port": 5432,
+    "dialect": "postgres",
+    "pool": {
+      "max": 5,
+      "min": 0
+    },
+    "logging": false
+  }
+}
