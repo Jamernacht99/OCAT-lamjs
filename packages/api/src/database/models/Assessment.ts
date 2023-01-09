@@ -34,7 +34,8 @@ InferCreationAttributes<Assessment>
       },
       instrumentType: {
         allowNull: false,
-        type: DataTypes.STRING,
+        field: `instrument_type`,
+        type: DataTypes.INTEGER,
       },
       score: {
         allowNull: false,
@@ -42,6 +43,7 @@ InferCreationAttributes<Assessment>
       },
       riskLevel: {
         allowNull: false,
+        field: `risk_level`,
         type: DataTypes.STRING,
       },
       catName: {

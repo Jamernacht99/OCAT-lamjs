@@ -6,12 +6,13 @@ import '../../scss/formStyles.scss';
 
 function riskLevel_color(p_score) {
   switch (true) {
-    case p_score <= 2:
+    case p_score <= 1:
       return `riskLevel_low bkClExclude1`;
-    case p_score <= 4 &&
-         p_score >= 2:
+    case p_score <= 3 &&
+         p_score >= 1:
       return `riskLevel_medium bkClExclude1`;
-    case p_score >= 5:
+    case p_score <= 5 &&
+      p_score >= 4:
       return `riskLevel_high bkClExclude1`;
     default:
       return `riskLevel_low bkClExclude1`;
@@ -19,12 +20,13 @@ function riskLevel_color(p_score) {
 }
 function riskLevel_text(p_score) {
   switch (true) {
-    case p_score <= 2:
+    case p_score <= 1:
       return `Low`;
-    case p_score <= 4 &&
-         p_score >= 2:
+    case p_score <= 3 &&
+      p_score >= 1:
       return `Medium`;
-    case p_score >= 5:
+    case p_score <= 5 &&
+      p_score >= 4:
       return `High`;
     default:
       return `Low`;
@@ -55,21 +57,27 @@ export const NewAssessment = () => {
       score: 0,
     },
   });
-  const onSubmit = async (data) => {
-    await AssessmentService.submit(data);
-    reset();
-    popupSnack();
-  };
 
   const vibeCheck = watch();
 
   const [ scoreRender, setScoreRender ] = useState(`score`);
+  const [ levelRender, setLevelRender ] = useState(`score`);
 
   useEffect(() => {
     setScoreRender(sum(vibeCheck.responses));
+    vibeCheck.score = scoreRender;
+    setLevelRender(riskLevel_text(vibeCheck.score));
 
   }, [ vibeCheck ]);
 
+  const onSubmit = async (data) => {
+    data.instrumentType = 1;
+    data.riskLevel = levelRender;
+    data.score = scoreRender;
+    await AssessmentService.submit(data);
+    reset();
+    popupSnack();
+  };
   return <Form className="flexColumn"
     onSubmit={handleSubmit(onSubmit)}
   >
@@ -111,7 +119,7 @@ export const NewAssessment = () => {
           Score:
           {scoreRender}
           | Risk Level:
-          {riskLevel_text(scoreRender)}
+          {levelRender}
         </div>
       </div>
       <div className="formQuestions flexColumn">

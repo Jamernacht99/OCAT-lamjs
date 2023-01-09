@@ -1,21 +1,19 @@
+// const { createDeflate } = require(`zlib`);
 const { Assessment } = require(`../database/models`);
 
 exports.submit = async (assessment) => {
   // use the sequelize model Assessments from packages/api/src/database/models to save
   // the assessment data in the PostgreSQL database
 
-  // Assessment.create({
-  //   instrumentType:assessment.
-  //   score:
-  //   riskLevel:
-  //   catName:
-  //   catDateOfBirth:
-  // }).then(res => {
-  //   console.log(res)
-  // }).catch((err) => {
-  //   console.error(`Oops, that create request failed`)
-  // })
+  // console.log(`assessment`, assessment);
 
+  await Assessment.create({
+    catDateOfBirth: assessment.catDateOfBirth,
+    catName: assessment.catName,
+    instrumentType: assessment.instrumentType,
+    riskLevel: assessment.riskLevel,
+    score: assessment.score,
+  });
 };
 
 exports.getList = () => {
