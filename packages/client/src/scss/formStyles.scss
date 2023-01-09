@@ -151,11 +151,11 @@
 
 
 
-input[stylename*="q"] {
+input[styleName*="q"] {
   display: none;
 }
 
-input[stylename*="q"]:checked+label {
+input[styleName*="q"]:checked+label {
   /* style passive state as you like */
   border: 3px outset rgb(89, 33, 33);
   background-color: rgb(69, 247, 69)

@@ -68,7 +68,7 @@ export const NewAssessment = () => {
     vibeCheck.score = scoreRender;
     setLevelRender(riskLevel_text(vibeCheck.score));
 
-  }, [ vibeCheck ]);
+  }, [ scoreRender, vibeCheck ]);
 
   const onSubmit = async (data) => {
     data.instrumentType = 1;
@@ -130,7 +130,7 @@ export const NewAssessment = () => {
             {...register(`responses[0]`)}
             id="r1"
             type="radio"
-            stylename="q1"
+            styleName="q1"
             value="0"
           />
           <label htmlFor="r1">
@@ -140,7 +140,7 @@ export const NewAssessment = () => {
             {...register(`responses[0]`)}
             id="r2"
             type="radio"
-            stylename="q1"
+            styleName="q1"
             value="1" />
           <label htmlFor="r2">
             Yes - 1
@@ -153,7 +153,7 @@ export const NewAssessment = () => {
             {...register(`responses[1]`)}
             id="r3"
             type="radio"
-            stylename="q2"
+            styleName="q2"
             value="0"
           />
           <label htmlFor="r3">
@@ -163,7 +163,7 @@ export const NewAssessment = () => {
             {...register(`responses[1]`)}
             id="r4"
             type="radio"
-            stylename="q2"
+            styleName="q2"
             value="1" />
           <label htmlFor="r4">
             3+ altercations - 1
@@ -177,7 +177,7 @@ export const NewAssessment = () => {
             {...register(`responses[2]`)}
             id="r6"
             type="radio"
-            stylename="q3"
+            styleName="q3"
             value="0" />
           <label htmlFor="r6">
             0-10 altercations - 0
@@ -186,7 +186,7 @@ export const NewAssessment = () => {
             {...register(`responses[2]`)}
             id="r5"
             type="radio"
-            stylename="q3"
+            styleName="q3"
             value="1"
           />
           <label htmlFor="r5">
@@ -201,7 +201,7 @@ export const NewAssessment = () => {
             {...register(`responses[3]`)}
             id="r8"
             type="radio"
-            stylename="q4"
+            styleName="q4"
             value="0"
           />
           <label htmlFor="r8">
@@ -211,7 +211,7 @@ export const NewAssessment = () => {
             {...register(`responses[3]`)}
             id="r7"
             type="radio"
-            stylename="q4"
+            styleName="q4"
             value="1" />
           <label htmlFor="r7">
             No - 1
@@ -225,7 +225,7 @@ export const NewAssessment = () => {
             {...register(`responses[4]`)}
             id="r10"
             type="radio"
-            stylename="q5"
+            styleName="q5"
             value="0" />
           <label htmlFor="r10">
             Yes - 0
@@ -234,7 +234,7 @@ export const NewAssessment = () => {
             {...register(`responses[4]`)}
             id="r9"
             type="radio"
-            stylename="q5"
+            styleName="q5"
             value="1"
           />
           <label htmlFor="r9">
