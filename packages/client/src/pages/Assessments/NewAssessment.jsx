@@ -72,7 +72,8 @@ export const NewAssessment = () => {
   }, [ scoreRender, vibeCheck ]);
 
   const onSubmit = async (data) => {
-    data.instrumentType = 1;
+    data.instrumentID = 1;
+    data.instrumentType = `Behavioral`;
     data.riskLevel = levelRender;
     data.score = scoreRender;
     await AssessmentService.submit(data);
@@ -86,6 +87,7 @@ export const NewAssessment = () => {
 
     <div className="formTitle">
       <h1>Cat Behavioral Instrument</h1>
+      <hr />
     </div>
 
     <div className="formSection">
@@ -267,22 +269,22 @@ export const NewAssessment = () => {
           />
           <input
             {...register(`responses[4]`, { required: `This field is required` })}
-            id="r10"
-            type="radio"
-            stylename="q5"
-            value="0" />
-          <label htmlFor="r10">
-            Yes - 0
-          </label>
-          <input
-            {...register(`responses[4]`, { required: `This field is required` })}
             id="r9"
             type="radio"
             stylename="q5"
-            value="1"
+            value="0"
           />
           <label htmlFor="r9">
-            No - 1
+            No - 0
+          </label>
+          <input
+            {...register(`responses[4]`, { required: `This field is required` })}
+            id="r10"
+            type="radio"
+            stylename="q5"
+            value="1" />
+          <label htmlFor="r10">
+            Yes - 1
           </label>
         </div>
       </div>

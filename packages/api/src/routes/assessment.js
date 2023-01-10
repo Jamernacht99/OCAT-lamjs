@@ -11,7 +11,6 @@ assessmentRouter.post(
   async (req, res, next) => {
     try {
       const { assessment } = req.body;
-      console.log(assessment);
       const result = await AssessmentService.submit(assessment);
       // verify that your data is making it here to the API by using console.log(assessment);
       // call the AssessmentService.submit function from packages/api/src/microservices/Assessment-Service.js and
@@ -20,7 +19,7 @@ assessmentRouter.post(
       ResponseHandler(
         res,
         `Submitted assessment`,
-        { assessment },
+        result,
       );
     } catch (err) {
       next(err);
@@ -29,17 +28,20 @@ assessmentRouter.post(
 );
 
 assessmentRouter.get(
-  `/`,
+  `/list`,
   async (req, res, next) => {
     try {
+
       // verify that your data is making it here to the API by using console.log();
       // call the AssessmentService.getList function from packages/api/src/microservices/Assessment-Service.js
-      const assessments = [];
+      const listData = await AssessmentService.getList();
+
+      const result = listData.map(assessment => assessment.dataValues);
 
       ResponseHandler(
         res,
         `Fetched assessments`,
-        { assessments },
+        result,
       );
     } catch (err) {
       next(err);

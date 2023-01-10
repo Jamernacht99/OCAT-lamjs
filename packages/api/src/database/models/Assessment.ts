@@ -13,6 +13,7 @@ InferCreationAttributes<Assessment>
 > {
   declare public id: CreationOptional<number>;
   declare public instrumentType: string;
+  declare public instrumentID: number;
   declare public score: number;
   declare public riskLevel: string;
   declare public catName: string;
@@ -32,10 +33,15 @@ InferCreationAttributes<Assessment>
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      instrumentID: {
+        allowNull: false,
+        field: `instrument_id`,
+        type: DataTypes.INTEGER,
+      },
       instrumentType: {
         allowNull: false,
         field: `instrument_type`,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
       },
       score: {
         allowNull: false,

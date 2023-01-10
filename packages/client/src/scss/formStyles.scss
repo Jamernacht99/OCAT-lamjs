@@ -88,23 +88,51 @@
 }
 
 @-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;} 
-  to {bottom: 30px; opacity: 1;}
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 
 @keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;} 
-  to {bottom: 0; opacity: 0;}
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 @keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 .formHeader_row {
@@ -122,11 +150,13 @@
   background-color: green;
   flex: 2;
 }
+
 .riskLevel_medium {
   text-align: center;
   background-color: orange;
   flex: 2;
 }
+
 .riskLevel_high {
   text-align: center;
   background-color: red;
@@ -141,6 +171,7 @@
 .formSection input {
   width: 100%;
 }
+
 .formQuestions div label {
   background: #ffffff;
   width: 50%;
@@ -166,4 +197,53 @@ input[stylename*="q"]:checked+label {
   /* style passive state as you like */
   border: 3px outset rgb(89, 33, 33);
   background-color: rgb(69, 247, 69)
+}
+
+.tableContainer {
+  padding: 1rem;
+    background-color: #adb5bd;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  padding: 1%;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid black;
+    background: #cdd3d8;
+
+  tr {
+    :last-child {
+      td {
+        border-bottom: 0;;
+      }
+    }
+    background-color: white;
+
+  }
+  thead tr:first-child {
+    display: none;
+  }
+
+  th,
+  td {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    :last-child {
+      border-right: 0;
+    }
+  }
+  tbody tr:nth-of-type(odd){
+    background: #cdd3d8;
+  }
 }
