@@ -212,6 +212,7 @@ input[stylename*="q"]:checked+label {
   margin-left: auto;
   box-sizing: border-box;
   padding: 1%;
+  flex-direction: column;
 }
 
 table {
