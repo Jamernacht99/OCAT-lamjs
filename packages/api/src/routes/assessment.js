@@ -37,7 +37,6 @@ assessmentRouter.get(
       const listData = await AssessmentService.getList();
 
       const result = listData.map(assessment => assessment.dataValues);
-
       ResponseHandler(
         res,
         `Fetched assessments`,

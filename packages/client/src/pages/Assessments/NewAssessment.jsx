@@ -4,49 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { AssessmentService } from '../../services/AssessmentService';
 import '../../scss/formStyles.scss';
-
-function riskLevel_color(p_score) {
-  switch (true) {
-    case p_score <= 1:
-      return `riskLevel_low bkClExclude1`;
-    case p_score <= 3 &&
-         p_score >= 1:
-      return `riskLevel_medium bkClExclude1`;
-    case p_score <= 5 &&
-      p_score >= 4:
-      return `riskLevel_high bkClExclude1`;
-    default:
-      return `riskLevel_low bkClExclude1`;
-  }
-}
-function riskLevel_text(p_score) {
-  switch (true) {
-    case p_score <= 1:
-      return `Low`;
-    case p_score <= 3 &&
-      p_score >= 1:
-      return `Medium`;
-    case p_score <= 5 &&
-      p_score >= 4:
-      return `High`;
-    default:
-      return `Low`;
-  }
-}
-function sum(obj) {
-  let objSum = 0;
-  for (const el in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, el)) {
-      objSum += parseFloat(obj[el]);
-    }
-  }
-  return objSum;
-}
-function popupSnack() {
-  const x = document.getElementById(`snackbar`);
-  x.className = `show`;
-  setTimeout(() => { x.className = x.className.replace(`show`, ``); }, 3000);
-}
+import { popupSnack, riskLevel_color, riskLevel_text, sum } from '../../utils/sharedComponents.js';
 
 export const NewAssessment = () => {
   // create a form that utilizes the "onSubmit" function to send data to

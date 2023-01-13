@@ -171,7 +171,9 @@
 .formSection input {
   width: 100%;
 }
-
+.formSection select {
+  width: 100%;
+}
 .formQuestions div label {
   background: #ffffff;
   width: 50%;
@@ -201,10 +203,10 @@ input[stylename*="q"]:checked+label {
 
 .tableContainer {
   padding: 1rem;
-    background-color: #adb5bd;
+  background-color: #adb5bd;
   color: rgb(0, 0, 0);
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x) * .5);
   padding-left: calc(var(--bs-gutter-x) * .5);
@@ -212,26 +214,50 @@ input[stylename*="q"]:checked+label {
   margin-left: auto;
   box-sizing: border-box;
   padding: 1%;
-  flex-direction: column;
+  // flex-direction: column;
 }
 
 table {
   width: 100%;
   border-spacing: 0;
   border: 1px solid black;
-    background: #cdd3d8;
+  background: #cdd3d8;
+  column-fill: auto;
 
   tr {
     :last-child {
       td {
-        border-bottom: 0;;
+        border-bottom: 0;
+        ;
       }
     }
+
     background-color: white;
 
   }
+
   thead tr:first-child {
     display: none;
+  }
+
+
+  thead tr:last-child :nth-child(1) {
+    width: 20%;
+  }
+  thead tr:last-child :nth-child(2) {
+    width: 15%;
+  }
+  thead tr:last-child :nth-child(3) {
+    width: 10%;
+  }
+  thead tr:last-child :nth-child(4) {
+    width: 5%;
+  }
+  thead tr:last-child :nth-child(5) {
+    width: 20%;
+  }
+  thead tr:last-child :nth-child(6) {
+    width: 15%;
   }
 
   th,
@@ -240,11 +266,15 @@ table {
     padding: 0.5rem;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
-    :last-child {
-      border-right: 0;
-    }
+
   }
-  tbody tr:nth-of-type(odd){
+
+  tbody tr:nth-of-type(odd) {
     background: #cdd3d8;
   }
+}
+.divider{
+  width:5px;
+  height:auto;
+  display:inline-block;
 }

@@ -1,4 +1,3 @@
-// const { createDeflate } = require(`zlib`);
 const { Assessment } = require(`../database/models`);
 
 exports.submit = async (assessment) => {

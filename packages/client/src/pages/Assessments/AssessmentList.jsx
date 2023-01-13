@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { usePagination, useTable } from 'react-table';
+import { usePagination, useSortBy, useTable } from 'react-table';
+import Button from 'react-bootstrap/Button';
 import { AssessmentService } from '../../services/AssessmentService';
 import '../../scss/formStyles.scss';
 
@@ -25,6 +26,7 @@ function Table({ columns, data }) {
       data,
       initialState: { pageIndex: 0 },
     },
+    useSortBy,
     usePagination
   );
 
@@ -36,9 +38,30 @@ function Table({ columns, data }) {
       <div>
         <table {...getTableProps()}>
           <thead>
-            {headerGroups.map((headerGroup) => <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => <th {...column.getHeaderProps()}>{column.render(`Header`)}</th>)}
-            </tr>)}
+            {headerGroups.map(headerGroup =>
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column =>
+                // Add the sorting props to control sorting. For this example
+                // we can add them into the header props
+                  <th style={{ paddingRight: `0` }}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}>
+
+                    <div style={{ display: `flex`, width: `100%` }}>
+
+                      <div style={{ flex: 9 }}>
+                        {column.render(`Header`)}
+                      </div>
+                      <span style={{ flex: 1, textAlign: `center` }}>
+                        {column.isSorted ?
+                          column.isSortedDesc ?
+                            `🔽` :
+                            `🔼` :
+                          `↕` }
+                      </span>
+                    </div>
+
+                  </th>)}
+              </tr>)}
           </thead>
           <tbody {...getTableBodyProps()}>
             {page.map((row) => {
@@ -102,7 +125,14 @@ export const AssessmentList = () => {
     };
     fetchAssessments();
   }, []);
-
+  const level = (rowA: Row, rowB: Row, id: string, desc: boolean): number => {
+    switch (true) {
+      case rowA.original[id]:
+        console.log(rowA);
+      default:
+        console.log(rowA.original.riskLevel);
+    }
+  };
   const columns = React.useMemo(
     () => [
       {
@@ -111,22 +141,43 @@ export const AssessmentList = () => {
           {
             Header: `Cat Name`,
             accessor: `catName`,
+            sortType: `string`,
+            width: Math.round((window.innerWidth - 75) * 0.2),
           },
           {
             Header: `Birth Date`,
             accessor: `catDateOfBirth`,
+            width: Math.round((window.innerWidth - 55) * 0.2),
           },
           {
             Header: `Risk Level`,
             accessor: `riskLevel`,
+            sortType: level,
+            width: Math.round((window.innerWidth - 55) * 0.2),
           },
           {
             Header: `Score`,
             accessor: `score`,
+            sortType: `basic`,
+            width: Math.round((window.innerWidth - 55) * 0.2),
           },
           {
             Header: `Assessment Type`,
             accessor: `instrumentType`,
+            sortType: `string`,
+            width: Math.round((window.innerWidth - 55) * 0.2),
+          },
+          {
+            Cell: () =>
+              <>
+                <Button>
+                  View
+                </Button>
+                <Button variant="danger">
+                  Delete
+                </Button>
+              </>,
+            Header: `Actions`,
           },
         ],
       },
